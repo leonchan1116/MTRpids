@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./paxLoad.js"></script>
+</head>
+
+<body style="overflow: hidden;background-color: white">
+    <div id="content">
+        <h1 class="header-zh">你可前往有較多空間的車廂</h1>
+        <h1 class="header-en">Please move to Cars with more space</h1>
+        <div id="pax">
+            <table>
+                <tr class="paxIcon">
+                </tr>
+            </table>
+
+            <table>
+                <tr class="paxIcon hidden">
+                </tr>
+                <tr id="carNum">
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        text-align: center;
+        font-family: "Myriad Pro", "Noto Sans", "Noto Serif TC";
+        font-weight: 500;
+        color: #1A2B42;
+    }
+    
+    #pax {
+        display: grid;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        table-layout: fixed;
+        width: 95%;
+        max-width: 95%;
+    }
+
+    #content {
+        position: absolute;
+        display: table;
+        margin: auto;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    
+    .header-zh {
+        font-size: calc((1vw + 1vh) * 4.5);
+    }
+    
+    .header-en {
+        font-size: calc((1vw + 1vh) * 3.4);
+    }
+    
+    .header-zh,
+    .header-en {
+        display: inline-block;
+        text-align: center;
+        max-width: 95%;
+        font-weight: 500;
+        margin: auto;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .scalable {
+        width: 95%;
+        display: block;
+    }
+    
+    .firstclass {
+        font-family: "Myriad Pro", "Noto Sans", "Noto Sans TC";
+        font-size: 2.6vw;
+        width: 2.6vw;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+    
+    #carNum {
+        font-size: calc((1vw + 1vh) * 4.5)
+    }
+    
+    .hidden {
+        visibility: collapse;
+    }
+</style>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MTR PIDS Simulator</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="zh_HK" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hktss.github.io/mtr-pids">
+    <meta property="og:title" content="願景資訊顯示屏模擬器">
+    <meta property="og:description" content=" ">
+    <meta property="og:image" content="https://hktss.github.io/mtr-pids/assets/img/thumb.png">
+    <meta property="og:image:width" content="960">
+    <meta property="og:image:height" content="468">
+
+    <!-- Twitter -->
+    <meta property="twitter:url" content="https://hktss.github.io/mtr-pids">
+    <meta property="twitter:title" content="MTR Railway Vision PIDS Simulator">
+    <meta property="twitter:description" content=" ">
+    <meta property="twitter:image" content="https://hktss.github.io/mtr-pids/assets/img/thumb.png">
+    <!-- Include this to make the og:image larger -->
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body>
+    <span class="widthCheck"></span>
+    <div class="config">
+        <div class="configBox">
+            <div id="error" style="display: none"></div>
+            <span class="title lang lang-en">RV PIDS Config</span>
+            <span class="title lang lang-zh">願景資訊顯示屏模擬器</span>
+            <button id="langchoose">EN</button>
+            <div class="online">
+                <h1 class="secHeader lang lang-en">Lines</h1>
+                <h1 class="secHeader lang lang-zh">路線</h1>
+                <select class="route">
+                    <option value="TCL">東涌綫 Tung Chung Line</option>
+                    <option value="TML">屯馬綫 Tuen Ma Line</option>
+                    <option value="TKL">將軍澳綫 Tsueng Kwan O Line</option>
+                    <option value="AEL">機場快綫 Airport Express</option>
+                    <option value="EAL">東鐵綫 East Rail Line</option>
+                    <option value="DRL">迪士尼綫 Disneyland Resort Line</option>
+                    <option value="LRT">輕鐵 Light Rail</option>
+                </select>
+
+                <h1 class="secHeader lang lang-en">Station</h1>
+                <h1 class="secHeader lang lang-zh">車站</h1>
+                <select class="station">
+                </select>
+
+                <h1 class="secHeader lang lang-en">Direction</h1>
+                <h1 class="secHeader lang lang-zh">方向</h1>
+                <select class="direction">
+                    <option value="UP"></option>
+                    <option value="DOWN"></option>
+                    <option value="BOTH"></option>
+                </select>
+            </div>
+
+            <div class="offline" style="display: none;">
+                <h1 class="secHeader lang lang-en">ETA Data</h1>
+                <h1 class="secHeader lang lang-zh">下班列車資料</h1>
+                <table>
+                    <tr class="lang lang-en">
+                        <td>Destination</td>
+                        <td class="centeredItem">Platform</td>
+                        <td class="centeredItem">ETA</td>
+                    </tr>
+                    <tr class="lang lang-zh">
+                        <td>終點站</td>
+                        <td class="centeredItem">月台</td>
+                        <td class="centeredItem">到達時間</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" autocomplete="off" id="dest1"></input>
+                        </td>
+                        <td><input type="text" size="1" autocomplete="off" id="plat1"></input>
+                        </td>
+                        <td><input type="text" size="2" autocomplete="off" id="ttnt1"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" autocomplete="off" id="dest2"></input>
+                        </td>
+                        <td><input type="text" size="1" autocomplete="off" id="plat2"></input>
+                        </td>
+                        <td><input type="text" size="2" autocomplete="off" id="ttnt2"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" autocomplete="off" id="dest3"></input>
+                        </td>
+                        <td><input type="text" size="1" autocomplete="off" id="plat3"></input>
+                        </td>
+                        <td><input type="text" size="2" autocomplete="off" id="ttnt3"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" autocomplete="off" id="dest4"></input>
+                        </td>
+                        <td><input type="text" size="1" autocomplete="off" id="plat4"></input>
+                        </td>
+                        <td><input type="text" size="2" autocomplete="off" id="ttnt4"></input>
+                        </td>
+                    </tr>
+                </table>
+                <h1 class="lang lang-en secHeader">Route Color (Hex)</h1>
+                <h1 class="lang lang-zh secHeader">路線顏色 (Hex)</h1>
+                #<input type="text" maxlength="6" size="6" class="rtColor"></input>
+                <br>
+                <h1 class="lang lang-en secHeader">Font Ratio:</h1>
+                <h1 class="lang lang-zh secHeader">字體比例</h1>
+                <input type="number" class="fontRatioCustom" size="2" value="1"></input>
+            </div>
+
+            <h1 class="secHeader lang lang-en">Special Message</h1>
+            <h1 class="secHeader lang lang-zh">特別信息</h1>
+            <select class="specialMsg"></select>
+            <br>
+            <h1 class="secHeader lang lang-en">Display Mode</h1>
+            <h1 class="secHeader lang lang-zh">顯示模式</h1>
+            <select class="dpMode">
+                <option value="NORMAL">Normal 正常</option>
+                <option value="AD">Display Ads Only 只顯示廣告</option>
+                <option value="ADNT1">Ads+Next Train 廣告+下一班車</option>
+                <option value="NT4">Next 4 Train 顯示下四班車</option>
+            </select>
+            <br>
+            <input type="checkbox" class="onlineMode translatable" checked></input><span class="lang lang-en">Use real-time train data</span><span class="lang lang-zh">使用實時到站資訊</span>
+            <br>
+            <input class="showPlat" type="checkbox" checked></input><span class="lang lang-en">Show Platform</span><span class="lang lang-zh">顯示月台</span>
+            <br>
+            <br>
+            <button class="tfs lang lang-en">Toggle Fullscreen</button>
+            <button class="tfs lang lang-zh">切換全螢幕</button>
+            <br>
+            <button class="saveCfg lang lang-en">Save & Close this page</button>
+            <button class="saveCfg lang lang-zh">套用設定及關閉此頁面</button>
+            <a href="https://www.facebook.com/HKTransportSimulationStudio" class="footer">HKTSS 2022</a>
+            <br>
+        </div>
+    </div>
+
+    <div class="main">
+        <div id="titlebar">
+            <div id="titleOverlay">
+                <span class="weatherIcon"></span>
+                <span class="weather notranslate"></span>
+                <span class="clock floatright"></span>
+            </div>
+        </div>
+
+        <div id="advertisement">
+        </div>
+
+        <div id="arrivals">
+            <table id="arrivalBackground">
+                <tr>
+                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td>&nbsp</td>
+                </tr>
+            </table>
+            <table id="arrivalOverlay">
+                <tr>
+                    <td class="destination scalable"></td>
+                    <td class="plat"><span class="platcircle"></span></td>
+                    <td class="eta scalable"></td>
+                </tr>
+                <tr>
+                    <td class="destination scalable"></td>
+                    <td class="plat"><span class="platcircle"></span></td>
+                    <td class="eta scalable"></td>
+                </tr>
+                <tr>
+                    <td class="destination scalable"></td>
+                    <td class="plat"><span class="platcircle"></span></td>
+                    <td class="eta scalable"></td>
+                </tr>
+                <tr>
+                    <td class="destination scalable"></td>
+                    <td class="plat"><span class="platcircle"></span></td>
+                    <td class="eta scalable"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
